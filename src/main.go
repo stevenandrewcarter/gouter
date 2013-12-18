@@ -26,7 +26,7 @@ func start(port string) {
 	log.Printf("Listening for HTTP requests on Port '%v'", port)
 }
 
-// Main entry point for the Gouter project. Will listen on the configured port and route
+// Main entry point for the Gouter project. Will listen on the configured port and models
 // the http request to the matched request. The response will be returned to the original
 // caller. 
 func main() {

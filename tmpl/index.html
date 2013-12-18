@@ -27,11 +27,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {{ range .Routes }}
                     <tr>
                         <td>1</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
+                        <td>{{ .Source }}</td>
+                        <td>{{ .Destination }}</td>
                     </tr>
+                    {{ end }}
                     </tbody>
                 </table>
             </div>
