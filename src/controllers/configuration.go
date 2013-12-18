@@ -17,8 +17,7 @@ func handleConfiguration(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Configuration: Handling '%v' Request to: '%v", r.Method, html.EscapeString(r.URL.Path))
 	// Check what type of request was made (GET / POST)
 	if r.Method == "GET" {
-		routes := make([]models.Route, 1)
-		routes[0] = models.Route{ Source: "/test", Destination: "/test" }
+		routes := models.Load()
 		page := &Page{Routes: routes}
 		t, _ := template.ParseFiles("tmpl/index.html")
 		t.Execute(w, page)
