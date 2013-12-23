@@ -13,7 +13,7 @@ type Page struct {
 }
 
 // Handles the Requests to the /config resource
-func index(w http.ResponseWriter, r *http.Request) {
+func indexHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Configuration: Handling '%v' Request to: '%v", r.Method, html.EscapeString(r.URL.Path))
 	// Check what type of request was made (GET / POST)
 	routes := models.Load()
@@ -44,7 +44,7 @@ func update(w http.ResponseWriter, r *http.Request) {
 // Loads the Configuration Controller for Gouter
 func Load() {
 	log.Printf("Configuration: Loading the configuration handlers.")
-	http.HandleFunc("/config", index)
+	http.HandleFunc("/config", indexHandler)
 	http.HandleFunc("/config/new", create)
 	http.HandleFunc("/config/edit", update)
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./tmpl/css"))))
