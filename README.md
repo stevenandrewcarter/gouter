@@ -37,3 +37,4 @@ Here are some useful links for the Project and GoLang in general
 Command Line Flags: https://gobyexample.com/command-line-flags
 Bootswatch BootStrap Themes: http://bootswatch.com/slate/
 Go Templates: http://jan.newmarch.name/go/template/chapter-template.html
+SB Admin: http://startbootstrap.com/sb-admin
