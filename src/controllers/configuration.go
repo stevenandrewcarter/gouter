@@ -6,6 +6,8 @@ import (
 	"html"
 	"html/template"
 	"models"
+	"labix.org/v2/mgo"
+	"labix.org/v2/mgo/bson"
 )
 
 type Page struct {
@@ -14,10 +16,21 @@ type Page struct {
 
 // Handles the Requests to the /config resource
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	session, err := mgo.Dial("localhost")
+	if err != nil {
+		panic(err)
+	}
+	defer session.Close()
+	c := session.DB("t2_dev").C("services_models_services")
+	result := []models.Route{}
+	err = c.Find(bson.M{}).All(&result)
+	if err != nil {
+		panic(err)
+	}
+	log.Printf(result[0].From)
 	log.Printf("Configuration: Handling '%v' Request to: '%v", r.Method, html.EscapeString(r.URL.Path))
 	// Check what type of request was made (GET / POST)
-	routes := models.Load()
-	page := &Page{Routes: routes}
+	page := &Page{Routes: result}
 	t := template.Must(template.ParseGlob("tmpl/*.html"))
 	// t, _ := template.ParseGlob("tmpl/*")
 	t.ExecuteTemplate(w, "indexPage", page)

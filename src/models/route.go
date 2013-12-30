@@ -9,19 +9,21 @@ import (
 )
 
 type Route struct {
-	Source string
-	Destination string
+	Description string
+	Name        string
+	From        string
+	To          string
 }
 
 func Load() []Route {
 	routes := []Route{}
-  // Load the Json from the file
-	jsonStream,_ := ioutil.ReadFile("data/routes.json")
+	// Load the Json from the file
+	jsonStream, _ := ioutil.ReadFile("data/routes.json")
 	dec := json.NewDecoder(strings.NewReader(string(jsonStream)))
 	for {
 		var r Route
 		if err := dec.Decode(&r); err == io.EOF {
-		  break
+			break
 		} else if err != nil {
 			log.Fatal(err)
 		}
