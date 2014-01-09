@@ -1,13 +1,11 @@
 package models
 
 import (
-	"strings"
-	"encoding/json"
-	"log"
-	"io"
-	"io/ioutil"
+	"labix.org/v2/mgo"
+	"labix.org/v2/mgo/bson"
 )
 
+// Structure that the routes will be represented by
 type Route struct {
 	Description string
 	Name        string
@@ -15,23 +13,18 @@ type Route struct {
 	To          string
 }
 
-func Load() []Route {
-	routes := []Route{}
-	// Load the Json from the file
-	jsonStream, _ := ioutil.ReadFile("data/routes.json")
-	dec := json.NewDecoder(strings.NewReader(string(jsonStream)))
-	for {
-		var r Route
-		if err := dec.Decode(&r); err == io.EOF {
-			break
-		} else if err != nil {
-			log.Fatal(err)
-		}
-		routes = append(routes, r)
+// Load all of the routes from the database
+func Routes() []Route {
+	session, err := mgo.Dial("localhost")
+	if err != nil {
+		panic(err)
 	}
-	return routes
-}
-
-func Save() {
-
+	defer session.Close()
+	c := session.DB("t2_dev").C("services_models_services")
+	result := []Route{}
+	err = c.Find(bson.M{}).All(&result)
+	if err != nil {
+		panic(err)
+	}
+	return result
 }

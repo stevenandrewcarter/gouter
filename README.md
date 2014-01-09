@@ -12,12 +12,17 @@ Installation of Gouter will require the Go Programming language. After installin
 as desired.
 
 Install the golang libraries from http://golang.org/doc/install. Check the source code out from the repo and start it by running
+
     go run gouter.go
 
 In addition you can set the port by using the flag
+
     go run gouter.go -port=x
 
 where x is the port number you want the router to listen on.
+
+Bazaar might be required if you want to update the mgo libraries. Please refer to the [mgo](http://labix.org/mgo) documentation
+for additional installation instructions.
 
 Configuration
 -------------
@@ -28,13 +33,15 @@ and for additional statistical information about Gouter.
 Data
 ----
 
-In the current build the data is stored locally in the data folder. In future this may change to use a proper database instead.
+Route data and usage statistics are stored in a local mongo database. Still need to allow for the database configuration.
 
 References
 ----------
 
 Here are some useful links for the Project and GoLang in general
-Command Line Flags: https://gobyexample.com/command-line-flags
-Bootswatch BootStrap Themes: http://bootswatch.com/slate/
-Go Templates: http://jan.newmarch.name/go/template/chapter-template.html
-SB Admin: http://startbootstrap.com/sb-admin
+
+* [Command Line Flags](https://gobyexample.com/command-line-flags)
+* [Bootswatch BootStrap Themes](http://bootswatch.com/slate/)
+* [Go Templates](http://jan.newmarch.name/go/template/chapter-template.html)
+* [SB Admin](http://startbootstrap.com/sb-admin)
+* [mgo](http://labix.org/mgo)
