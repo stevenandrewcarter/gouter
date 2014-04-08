@@ -5,8 +5,8 @@ import (
 	"flag"
 	"log"
 	"net/http"
-	"controllers"
-	"router"
+	"gouter/controllers"
+	"gouter/router"
 )
 
 // Loads the parameters that got provided on the command line. If not provided will use the defaults instead
