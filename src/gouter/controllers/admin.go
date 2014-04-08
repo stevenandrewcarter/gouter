@@ -48,15 +48,15 @@ func create(params url.Values) bool {
 
 // Handles the Requests to the /config/edit resource (Currently Not Implemented)
 func update(w http.ResponseWriter, r *http.Request) {
-	log.Printf("Configuration: Handling '%v' Request to: '%v", r.Method, html.EscapeString(r.URL.Path))
+	log.Printf("Administration: Handling '%v' Request to: '%v", r.Method, html.EscapeString(r.URL.Path))
 }
 
 // Loads the Configuration Controller for Gouter
 func Load() {
-	log.Printf("Configuration: Loading the configuration handlers.")
+	log.Printf("Administration: Loading the configuration handlers.")
 	// Handle the Controller actions
-	http.HandleFunc("/config", index)
-	http.HandleFunc("/config/edit", update)
+	http.HandleFunc("/admin", index)
+	http.HandleFunc("/admin/edit", update)
 	// Standard handling of the css, js and fonts paths
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./tmpl/css"))))
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("./tmpl/js"))))

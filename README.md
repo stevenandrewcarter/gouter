@@ -27,13 +27,17 @@ for additional installation instructions.
 Configuration
 -------------
 
-You will be able to configure from the http://localhost:9090/config url. Please use the web interface to configure the routes
+You will be able to configure from the http://localhost:8080/admin url. Please use the web interface to configure the routes
 and for additional statistical information about Gouter.
+
+Application configuration can be altered in the config directory. The [gcfg](https://code.google.com/p/gcfg/) is used to manage the database
+connections and other application specific configurations.
 
 Data
 ----
 
-Route data and usage statistics are stored in a local mongo database. Still need to allow for the database configuration.
+Route data and usage statistics are stored in a local mongo database. By default the name of the database will be gouter and the host will
+be the localhost. Please update the application configuration to suite your environment.
 
 References
 ----------
@@ -45,3 +49,4 @@ Here are some useful links for the Project and GoLang in general
 * [Go Templates](http://jan.newmarch.name/go/template/chapter-template.html)
 * [SB Admin](http://startbootstrap.com/sb-admin)
 * [mgo](http://labix.org/mgo)
+* [gcfg](https://code.google.com/p/gcfg/)

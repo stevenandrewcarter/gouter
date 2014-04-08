@@ -1,0 +1,9 @@
+; Comment line
+; [section]
+; name = value # Another comment
+; flag # implicit value for bool is true
+
+; Mongo Database Configuration
+[database]
+host = localhost
+database = gouter
