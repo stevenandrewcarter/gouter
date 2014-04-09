@@ -11,7 +11,9 @@ Installation
 Installation of Gouter will require the Go Programming language. After installing Go you will be able to execute the application
 as desired.
 
-Install the golang libraries from http://golang.org/doc/install. Check the source code out from the repo and start it by running
+Install the golang libraries from http://golang.org/doc/install. Once the source code is checked out you can install the 3rd party packages
+from the make shell script (make.sh). Please be aware that bazaar will be required to install the mgo packages.
+Check the source code out from the repo and start it by running
 
     go run gouter.go
 
