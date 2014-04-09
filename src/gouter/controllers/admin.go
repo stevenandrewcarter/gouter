@@ -20,7 +20,20 @@ type Page struct {
 func index(w http.ResponseWriter, r *http.Request) {
 	message := ""
 	messageState := ""
-	log.Printf("Configuration: Handling '%v' Request to: '%v", r.Method, html.EscapeString(r.URL.Path))
+	log.Printf("Administration: Handling '%v' Request to: '%v", r.Method, html.EscapeString(r.URL.Path))
+	// Check for a Delete request
+	query := r.URL.Query()
+	if len(query["name"]) != 0 && len(query["action"]) != 0 {
+		log.Printf("Administration: Deleting '%v'", query["name"][0])
+		// Delete the given route
+		if models.Delete(query["name"][0]) {
+			message = "Route succesfully deleted!"
+			messageState = "success"
+		} else {
+			message = "Could not delete the route!"
+			messageState = "warning"
+		}
+	}
 	// Check if the request was a POST
 	if r.Method == "POST" {
 		r.ParseForm()

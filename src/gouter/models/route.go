@@ -1,6 +1,7 @@
 package models
 
 import (
+	"log"
 	"labix.org/v2/mgo"
 	"labix.org/v2/mgo/bson"
 	"gouter"
@@ -42,6 +43,7 @@ func Find(name string) Route {
 	err = c.Find(bson.M{"name": name}).One(&result)
 	if err != nil {
 		result = Route{}
+		log.Printf("Route '%v' not found. Error: %v", name, err)
 		// panic(err)
 	}
 	return result
@@ -62,6 +64,27 @@ func Create(route Route) bool {
 		}
 		return true
 	} else {
+		return false
+	}
+}
+
+func Delete(name string) bool {
+	checkRoute := Find(name)
+	if checkRoute.Name != "" {
+		session, err := mgo.Dial(gouter.Configuration().Database.Host)
+		if err != nil {
+			panic(err)
+		}
+		defer session.Close()
+		c := session.DB(gouter.Configuration().Database.Database).C("services_models_services")
+		err = c.Remove(bson.M{"name": name})
+		if err != nil {
+			panic(err)
+		}
+		log.Printf("Route deleted '%v'", name)
+		return true
+	} else {
+		log.Printf("Route '%v' not found", name)
 		return false
 	}
 }
