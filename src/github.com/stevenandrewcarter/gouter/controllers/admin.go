@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"html"
 	"html/template"
-	"gouter/models"
+	"github.com/stevenandrewcarter/gouter/models"
 	"net/url"
 )
 
