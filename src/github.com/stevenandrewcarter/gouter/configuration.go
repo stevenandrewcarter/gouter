@@ -10,6 +10,10 @@ type Config struct {
 		Host string
 		Database string
 	}
+	Application struct {
+		Port string
+		AdminUrl string
+	}
 }
 
 // Loads the application configuration, will cause a panic if the configuration cannot be loaded

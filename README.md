@@ -1,18 +1,18 @@
 Gouter
 ======
 
-Router written in GoLang. The project is written as a proof of concept and a learning exercise of the Go Programming Language.
-Please refer to the following sections for instructions on how to run the project, configure the project and any additional information,
-which might be useful.
+Gouter is a simple url rewriter Router written in GoLang. The project is written as a proof of concept and a learning exercise of the Go Programming Language.
+Please refer to the following sections for instructions on how to run the project, configure the project and any additional information, which might be useful.
 
 Installation
 ------------
 
-Installation of Gouter will require the Go Programming language. After installing Go you will be able to execute the application
-as desired.
+Installation of Gouter will require the Go Programming language. After installing Go you will be able to execute the application as desired.
 
 Install the golang libraries from http://golang.org/doc/install. Once the source code is checked out you can install the 3rd party packages
-from the make shell script (make.sh). Please be aware that bazaar will be required to install the mgo packages.
+from the make shell script (make.sh). Bazaar might be required if you want to update the mgo libraries. Please refer to the [mgo](http://labix.org/mgo) documentation
+for additional installation instructions.
+
 Check the source code out from the repo and start it by running
 
     go run gouter.go
@@ -23,23 +23,25 @@ In addition you can set the port by using the flag
 
 where x is the port number you want the router to listen on.
 
-Bazaar might be required if you want to update the mgo libraries. Please refer to the [mgo](http://labix.org/mgo) documentation
-for additional installation instructions.
 
 Configuration
 -------------
 
-You will be able to configure from the http://localhost:8080/admin url. Please use the web interface to configure the routes
-and for additional statistical information about Gouter.
+Gouter can be configured at an application level and a runtime level. The application configuration can be found in the
+config directory. The [gcfg](https://code.google.com/p/gcfg/) library is used to manage the database connections and other application specific configurations.
+In addition the default port and administration url can be set in the application configuration.
 
-Application configuration can be altered in the config directory. The [gcfg](https://code.google.com/p/gcfg/) is used to manage the database
-connections and other application specific configurations.
+The runtime configuration and monitoring can be accessed from the administration url (By default it will be http://localhost:8080/admin).
+Please use the web interface to configure and manage the routes. Review analytics regarding the requests via the router, and to help
+troubleshoot any issues that might arise from the router.
+
+The route name and source fields must be unique.
 
 Data
 ----
 
-Route data and usage statistics are stored in a local mongo database. By default the name of the database will be gouter and the host will
-be the localhost. Please update the application configuration to suite your environment.
+Route data and usage statistics are stored in a local mongo database. By default the name of the database will be *gouter* and the host will
+be *localhost*. Please update the application configuration to suite your environment.
 
 References
 ----------

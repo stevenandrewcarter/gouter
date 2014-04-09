@@ -1,9 +1,16 @@
-; Comment line
-; [section]
-; name = value # Another comment
-; flag # implicit value for bool is true
+# Application Configuration file
+# ==============================
+# Contains the configuration for the application.
+# Configuration information includes the default port, database information, etc
 
-; Mongo Database Configuration
+# Default Application Configuration
+# ----------------------------
+[application]
+port = 8080
+adminUrl = /admin
+
+# Mongo Database Configuration
+# ----------------------------
 [database]
 host = localhost
 database = gouter
