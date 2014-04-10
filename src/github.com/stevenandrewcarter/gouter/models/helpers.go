@@ -6,6 +6,9 @@ import (
 	"github.com/stevenandrewcarter/gouter"
 )
 
+const ROUTE_COLLECTION = "routes"
+const ERROR_COLLECTION = "routes"
+
 // Execute function signature, used as a helper for functions to database connections
 type executeFunc func(collection *mgo.Collection)
 

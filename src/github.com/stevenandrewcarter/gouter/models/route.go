@@ -21,7 +21,7 @@ func LoadRoutes() []Route {
 		err := collection.Find(bson.M{}).All(&result)
 		if err != nil { panic(err) }
 	})
-	execute(fn, routeCollection)
+	execute(fn, ROUTE_COLLECTION)
 	return result
 }
 
@@ -36,7 +36,7 @@ func FindRoute(name string) Route {
 			log.Printf("Route '%v' not found. Error: %v", name, err)
 		}
 	})
-	execute(fn, routeCollection)
+	execute(fn, ROUTE_COLLECTION)
 	return result
 }
 
@@ -52,7 +52,7 @@ func CreateRoute(route Route) bool {
 			log.Printf("Route created '%v'", route.Name)
 			created = true
 		})
-		execute(fn, routeCollection)
+		execute(fn, ROUTE_COLLECTION)
 	}
 	return created
 }
@@ -67,6 +67,6 @@ func DeleteRoute(name string) bool {
 		log.Printf("Route deleted '%v'", name)
 		deleted = true
 	})
-	execute(fn, routeCollection)
+	execute(fn, ROUTE_COLLECTION)
 	return deleted
 }

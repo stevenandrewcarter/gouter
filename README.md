@@ -23,7 +23,6 @@ In addition you can set the port by using the flag
 
 where x is the port number you want the router to listen on.
 
-
 Configuration
 -------------
 
