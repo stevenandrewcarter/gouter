@@ -1,6 +1,8 @@
 Gouter
 ======
 
+**Please be aware that this project is only a proof of concept, do not expect good code or it being fully functional.**
+
 Gouter is a simple url rewriter Router written in GoLang. The project is written as a proof of concept and a learning exercise of the Go Programming Language.
 Please refer to the following sections for instructions on how to run the project, configure the project and any additional information, which might be useful.
 

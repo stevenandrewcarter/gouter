@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"github.com/stevenandrewcarter/gouter"
 	"github.com/stevenandrewcarter/gouter/controllers"
-	"github.com/stevenandrewcarter/gouter/router"
+	"github.com/stevenandrewcarter/gouter/lib"
 )
 
 // Loads the parameters that got provided on the command line. If not provided will use the defaults instead
@@ -20,9 +20,9 @@ func loadParameters() (string) {
 // Displays the start blurb for the router
 func start(port string) {
 	log.Printf("\n  ________               __                \n /  _____/  ____  __ ___/  |_  ___________ \n/   \\  ___ /  _ \\|  |  \\   __\\/ __ \\_  __ \\ \n\\    \\_\\  (  <_> )  |  /|  | \\  ___/|  | \\/\n \\______  /\\____/|____/ |__|  \\___  >__|\n        \\/                        \\/")
-	log.Printf("Starting Gouter v0.2. A simple HTTP router for RESTful API calls.")
+	log.Printf("Starting Gouter v0.5. A simple HTTP router for RESTful API calls.")
 	log.Printf("Please call http://localhost:%v%v to configure Gouter.", port, gouter.Configuration().Application.AdminUrl)
-	http.HandleFunc("/", router.HandleRequest)
+	http.HandleFunc("/", lib.HandleRequest)
 	controllers.Load()
 	log.Printf("Listening for HTTP requests on Port '%v'", port)
 }

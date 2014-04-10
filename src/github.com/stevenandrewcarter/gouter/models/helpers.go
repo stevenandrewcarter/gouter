@@ -7,7 +7,7 @@ import (
 )
 
 const ROUTE_COLLECTION = "routes"
-const ERROR_COLLECTION = "routes"
+const LOG_COLLECTION = "logs"
 
 // Execute function signature, used as a helper for functions to database connections
 type executeFunc func(collection *mgo.Collection)

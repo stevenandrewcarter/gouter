@@ -40,6 +40,19 @@ func FindRoute(name string) Route {
 	return result
 }
 
+func FindRouteByFrom(from string) (Route, error) {
+	result := Route{}
+	var err error = nil
+	fn := executeFunc(func(collection *mgo.Collection) {
+		err = collection.Find(bson.M{"from": from}).One(&result)
+		if err != nil {
+			log.Printf("Route '%v' not found. Error: %v", from, err)
+		}
+	})
+	execute(fn, ROUTE_COLLECTION)
+	return result, err
+}
+
 // Create a route from the provided route structure
 // Returns true if the route was created successfully, or false if it already exists
 func CreateRoute(route Route) bool {

@@ -27,17 +27,12 @@ func index(w http.ResponseWriter, r *http.Request) {
 	t.ExecuteTemplate(w, "indexPage", page)
 }
 
-// Handles the Requests to the /config/edit resource (Currently Not Implemented)
-func update(w http.ResponseWriter, r *http.Request) {
-	log.Printf("Administration: Handling '%v' Request to: '%v", r.Method, html.EscapeString(r.URL.Path))
-}
-
 // Performs the delete request for the admin controller
 func deleteRequest(r *http.Request) (string, string) {
 	message := ""
 	messageState := ""
 	query := r.URL.Query()
-	if len(query["name"]) != 0 && len(query["action"]) != 0 {
+	if len(query["name"]) != 0 && len(query["action"]) != 0 && query["action"][0] == "delete" {
 		log.Printf("Administration: Deleting '%v'", query["name"][0])
 		if models.DeleteRoute(query["name"][0]) {
 			message = "Route succesfully deleted!"
@@ -50,10 +45,10 @@ func deleteRequest(r *http.Request) (string, string) {
 	return message, messageState
 }
 
+// Handles a create request (POST)
 func createRequest(r *http.Request) (string, string) {
 	message := ""
 	messageState := ""
-	// Check if the request was a POST
 	if r.Method == "POST" {
 		r.ParseForm()
 		params := r.Form
