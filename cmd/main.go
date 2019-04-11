@@ -3,9 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/stevenandrewcarter/gouter/cmd/gouter"
-	"github.com/stevenandrewcarter/gouter/cmd/gouter/controllers"
-	"github.com/stevenandrewcarter/gouter/cmd/gouter/lib"
+	"github.com/stevenandrewcarter/gouter/controllers"
+	"github.com/stevenandrewcarter/gouter/lib"
 	"log"
 	"net/http"
 	"github.com/spf13/cobra"
