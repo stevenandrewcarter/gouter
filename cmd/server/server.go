@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"net/http"
-	"os"
 	"log"
 )
 
@@ -16,7 +15,7 @@ func start(port int) {
 	log.Printf("Starting Gouter v0.5. A simple HTTP router for RESTful API calls.")
 	log.Printf("Please call http://localhost:%v%v to configure Gouter.", port, gouter.Configuration().Application.AdminUrl)
 	http.HandleFunc("/", lib.HandleRequest)
-	controllers.Load()
+	// controllers.Load()
 	log.Printf("Listening for HTTP requests on Port '%v'", port)
 }
 

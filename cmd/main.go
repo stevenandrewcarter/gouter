@@ -1,19 +1,16 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"github.com/stevenandrewcarter/gouter/controllers"
-	"github.com/stevenandrewcarter/gouter/lib"
+	"os"
 	"log"
-	"net/http"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/stevenandrewcarter/gouter/cmd/server"
 )
 
 func main() {
 	if err := RootCmd.Execute(); err != nil {
-		log.Error(err.Error())
+		log.Fatalf(err.Error())
 		os.Exit(-1)
 	}
 }
