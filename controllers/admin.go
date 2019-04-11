@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"html"
 	"html/template"
-	"github.com/stevenandrewcarter/gouter/cmd/gouter/models"
+	"github.com/stevenandrewcarter/gouter/models"
 )
 
 // Indicates what the contents of a page should look like

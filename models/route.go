@@ -1,4 +1,4 @@
-// package models
+package models
 
 // import (
 // 	"github.com/stevenandrewcarter/gouter/cmd/gouter"

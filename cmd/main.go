@@ -8,30 +8,39 @@ import (
 	"github.com/stevenandrewcarter/gouter/cmd/gouter/lib"
 	"log"
 	"net/http"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
-// Loads the parameters that got provided on the command line. If not provided will use the defaults instead
-func loadParameters() (string) {
-	wordPtr := flag.String("port", gouter.Configuration().Application.Port, "Port Number for the Gouter to run at")
-	flag.Parse()
-	return *wordPtr
-}
-
-// Displays the start blurb for the router
-func start(port string) {
-	log.Printf("\n  ________               __                \n /  _____/  ____  __ ___/  |_  ___________ \n/   \\  ___ /  _ \\|  |  \\   __\\/ __ \\_  __ \\ \n\\    \\_\\  (  <_> )  |  /|  | \\  ___/|  | \\/\n \\______  /\\____/|____/ |__|  \\___  >__|\n        \\/                        \\/")
-	log.Printf("Starting Gouter v0.5. A simple HTTP router for RESTful API calls.")
-	log.Printf("Please call http://localhost:%v%v to configure Gouter.", port, gouter.Configuration().Application.AdminUrl)
-	http.HandleFunc("/", lib.HandleRequest)
-	controllers.Load()
-	log.Printf("Listening for HTTP requests on Port '%v'", port)
-}
-
-// Main entry point for the Gouter project. Will listen on the configured port and models
-// the http request to the matched request. The response will be returned to the original
-// caller. 
 func main() {
-	port := loadParameters()
-	start(port)
-	http.ListenAndServe(fmt.Sprintf(":%v", port), nil)
+	if err := RootCmd.Execute(); err != nil {
+		log.Error(err.Error())
+		os.Exit(-1)
+	}
+}
+
+// RootCmd The Default command for running Gouter
+var RootCmd = &cobra.Command{
+	Use:   "gouter",
+	Short: "Gouter is a simple proxy for routing traffic. It is designed to route dynamically.",
+	Long:  "Gouter provides a solution for dynamically updating routing as and when needed.",
+}
+
+/*
+ * Initialize the Cobra command handlers
+ */
+ func init() {
+	RootCmd.AddCommand(ServerCmd)
+	RootCmd.AddCommand(VersionCmd)
+	ServerCmd.Flags().StringVarP(&elasticServerUrl,
+		"elastic_url",
+		"e",
+		"http://localhost:9200",
+		"The elastic server Url that Hydra will monitor")
+	ServerCmd.Flags().IntVarP(&port,
+		"port",
+		"p",
+		8080,
+		"Port that Gouter will listen on")
+	viper.BindPFlag("server.port", ServerCmd.Flags().Lookup("port"))
 }

@@ -1,10 +1,10 @@
 package models
 
-import (
-	"github.com/stevenandrewcarter/gouter/cmd/gouter"
-	// "labix.org/v2/mgo"
-	// "labix.org/v2/mgo/bson"
-)
+// import (
+// 	"github.com/stevenandrewcarter/gouter/cmd/gouter"
+// 	// "labix.org/v2/mgo"
+// 	// "labix.org/v2/mgo/bson"
+// )
 
 // Structure that the routes will be represented by
 type Log struct {

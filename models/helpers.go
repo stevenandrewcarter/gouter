@@ -1,10 +1,10 @@
 // Package models includes the models used for the gouter configuration
 package models
 
-import (
-	// "labix.org/v2/mgo"
-	"github.com/stevenandrewcarter/gouter/cmd/gouter"
-)
+// import (
+// 	// "labix.org/v2/mgo"
+// 	"github.com/stevenandrewcarter/gouter/cmd/gouter"
+// )
 
 const ROUTE_COLLECTION = "routes"
 const LOG_COLLECTION = "logs"

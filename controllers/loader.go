@@ -1,7 +1,7 @@
 package controllers
 
 import (	
-	"github.com/stevenandrewcarter/gouter/cmd/gouter"
+	"github.com/stevenandrewcarter/gouter/configs"
 	"log"
 	"net/http"
 )
