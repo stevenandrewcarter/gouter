@@ -1,13 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"flag"
+	"fmt"
+	"github.com/stevenandrewcarter/gouter/cmd/gouter"
+	"github.com/stevenandrewcarter/gouter/cmd/gouter/controllers"
+	"github.com/stevenandrewcarter/gouter/cmd/gouter/lib"
 	"log"
 	"net/http"
-	"github.com/stevenandrewcarter/gouter"
-	"github.com/stevenandrewcarter/gouter/controllers"
-	"github.com/stevenandrewcarter/gouter/lib"
 )
 
 // Loads the parameters that got provided on the command line. If not provided will use the defaults instead

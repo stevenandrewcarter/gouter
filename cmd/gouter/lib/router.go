@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"html"
 	"fmt"
-	"github.com/stevenandrewcarter/gouter/models"
+	"github.com/stevenandrewcarter/gouter/cmd/gouter/models"
 	"time"
 	"io/ioutil"
 )

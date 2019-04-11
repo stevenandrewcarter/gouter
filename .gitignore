@@ -23,3 +23,6 @@ _testmain.go
 
 .idea
 *.iml
+
+# Ignore Vendor, this will be populated via dep
+vendor/**

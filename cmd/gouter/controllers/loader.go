@@ -1,16 +1,16 @@
 package controllers
 
-import (
+import (	
+	"github.com/stevenandrewcarter/gouter/cmd/gouter"
 	"log"
 	"net/http"
-	"github.com/stevenandrewcarter/gouter"
 )
 
 // Loads the route handers for configuration for the go router
 func Load() {
 	log.Printf("Administration: Loading the configuration handlers.")
 	// Handle the Controller actions
-	http.HandleFunc(gouter.Configuration().Application.AdminUrl, index)
+	http.HandleFunc(gouter.Configuration().Application.AdminUrl, cmd.index)
 	// Standard handling of the css, js and fonts paths
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./tmpl/css"))))
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("./tmpl/js"))))

@@ -1,8 +1,6 @@
 package gouter
 
-import (
-	"code.google.com/p/gcfg"
-)
+import "gopkg.in/gcfg.v1"
 
 // Configuration structure that is loaded from the application configuration file
 type Config struct {
