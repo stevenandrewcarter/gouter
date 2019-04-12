@@ -1,11 +1,12 @@
 package main
 
 import (
-	"os"
-	"log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/stevenandrewcarter/gouter/cmd/server"
+	"github.com/stevenandrewcarter/gouter/cmd/version"
+	"log"
+	"os"
 )
 
 func main() {
@@ -22,21 +23,24 @@ var RootCmd = &cobra.Command{
 	Long:  "Gouter provides a solution for dynamically updating routing as and when needed.",
 }
 
+var port = 8080
+var url = "http://localhost"
+
 /*
  * Initialize the Cobra command handlers
  */
  func init() {
-	RootCmd.AddCommand(ServerCmd)
-	RootCmd.AddCommand(VersionCmd)
-	ServerCmd.Flags().StringVarP(&elasticServerUrl,
+	RootCmd.AddCommand(server.ServerCmd)
+	RootCmd.AddCommand(cmd.VersionCmd)
+	server.ServerCmd.Flags().StringVarP(&url,
 		"elastic_url",
 		"e",
 		"http://localhost:9200",
 		"The elastic server Url that Hydra will monitor")
-	ServerCmd.Flags().IntVarP(&port,
+	server.ServerCmd.Flags().IntVarP(&port,
 		"port",
 		"p",
 		8080,
 		"Port that Gouter will listen on")
-	viper.BindPFlag("server.port", ServerCmd.Flags().Lookup("port"))
+	viper.BindPFlag("server.port", server.ServerCmd.Flags().Lookup("port"))
 }
