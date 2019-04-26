@@ -1,13 +1,10 @@
 package lib
 
 import (
-	// "log"
+	"fmt"
+	"html"
+	"log"
 	"net/http"
-	// "html"
-	// "fmt"
-	// "github.com/stevenandrewcarter/gouter/models"
-	// "time"
-	// "io/ioutil"
 )
 
 // Handles the requests to the router
@@ -17,7 +14,7 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	// to := ""
 	// responseCode := 0
 	// processingTime := 0.0
-	// log.Printf("Handling Request from: '%v", html.EscapeString(r.URL.Path))
+	log.Printf("Handling Request from: '%v", html.EscapeString(r.URL.Path))
 	// route, err := models.FindRouteByFrom(from)
 	// if err == nil {
 	// 	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
@@ -36,9 +33,9 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	// 	}
 	// 	to = route.To
 	// } else {
-	// 	fmt.Fprintf(w, "Not found, %q. Error: %v", html.EscapeString(r.URL.Path), err)
-	// 	responseCode = 404
-	// 	to = "Not Found"
+	fmt.Fprintf(w, "Not found, %q. Error: %v", html.EscapeString(r.URL.Path), "")
+	// responseCode = 404
+	// to = "Not Found"
 	// }
 	// processingTime = time.Now().Sub(startTime).Seconds()
 	// models.CreateLog(models.Log{CreatedAt: startTime.Format(time.RFC3339), From: r.URL.Path, To: to, ProcessingTimeSec: processingTime, ResponseCode: responseCode})
