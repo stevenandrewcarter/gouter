@@ -3,7 +3,6 @@ package server
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/stevenandrewcarter/gouter/controllers"
 	"github.com/stevenandrewcarter/gouter/lib"
 	"log"
 	"net/http"
@@ -17,20 +16,19 @@ var host string
  * Starts the Server and opens the port for listening
  */
 func start() {
-	log.Printf("\n  ________               __                \n /  _____/  ____  __ ___/  |_  ___________ \n/   \\  ___ /  _ \\|  |  \\   __\\/ __ \\_  __ \\ \n\\    \\_\\  (  <_> )  |  /|  | \\  ___/|  | \\/\n \\______  /\\____/|____/ |__|  \\___  >__|\n        \\/                        \\/")
+	log.Printf(`
+  ________               __                
+ /  _____/  ____  __ ___/  |_  ___________ 
+/   \  ___ /  _ \|  |  \   __\/ __ \_  __ \ 
+\    \_\  (  <_> )  |  /|  | \  ___/|  | \/
+ \______  /\____/|____/ |__|  \___  >__|
+        \/                        \/`)
 	log.Printf("Starting Gouter v0.5. A simple HTTP router for RESTful API calls.")
-	log.Printf("Please call %s:%v%s to configure Gouter.", host, port, url)
 	http.HandleFunc("/", lib.HandleRequest)
-	controllers.Load(url)
 	log.Printf("Listening for HTTP requests on Port '%v'", port)
 }
 
 func Init() {
-	ServerCmd.Flags().StringVarP(&url,
-		"url",
-		"e",
-		"/admin",
-		"Admin URL for Gouter")
 	ServerCmd.Flags().IntVarP(&port,
 		"port",
 		"p",

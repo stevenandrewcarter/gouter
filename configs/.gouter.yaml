@@ -10,12 +10,6 @@ server:
   port: 8080
   url: "http://localhost:8080/admin"
 
-#[application]
-#port = 8080
-#adminUrl = /admin
-
-# Mongo Database Configuration
-# ----------------------------
-#[database]
-#host = localhost
-#database = gouter
+routes:
+  - source: /admin
+    destination: www.google.com

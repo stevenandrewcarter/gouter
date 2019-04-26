@@ -7,6 +7,21 @@ import (
 	"net/http"
 )
 
+// Structure that the routes will be represented by
+type Route struct {
+	Description string `yaml:"description"`
+	Name        string `yaml:"name"`
+	Source      string `yaml:"source"`
+	Destination string `yaml:"destination"`
+}
+
+var routes []Route
+
+// Loads the Routes as per the configuration
+func Load() {
+
+}
+
 // Handles the requests to the router
 func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	// startTime := time.Now()
@@ -14,7 +29,7 @@ func HandleRequest(w http.ResponseWriter, r *http.Request) {
 	// to := ""
 	// responseCode := 0
 	// processingTime := 0.0
-	log.Printf("Handling Request from: '%v", html.EscapeString(r.URL.Path))
+	log.Printf("Handling Request from: '%v'", html.EscapeString(r.URL.Path))
 	// route, err := models.FindRouteByFrom(from)
 	// if err == nil {
 	// 	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))

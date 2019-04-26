@@ -9,10 +9,10 @@ package models
 
 // Structure that the routes will be represented by
 type Route struct {
-	Description string
-	Name        string
-	From        string
-	To          string
+	Description string `yaml:"description"`
+	Name        string `yaml:"name"`
+	Source      string `yaml:"source"`
+	Destination string `yaml:"destination"`
 }
 
 // // Load all of the routes from the database
