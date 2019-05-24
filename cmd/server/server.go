@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/stevenandrewcarter/gouter/lib"
 	"log"
 	"net/http"
@@ -29,6 +30,7 @@ func start() {
 }
 
 func Init() {
+	log.Printf("Initializing config for server")
 	ServerCmd.Flags().IntVarP(&port,
 		"port",
 		"p",
@@ -39,6 +41,9 @@ func Init() {
 		"a",
 		"http://localhost",
 		"Host that Gouter is running on")
+	if err := viper.BindPFlag("port", ServerCmd.Flags().Lookup("port")); err != nil {
+		log.Print(err)
+	}
 }
 
 var ServerCmd = &cobra.Command{

@@ -40,9 +40,6 @@ func init() {
 	RootCmd.AddCommand(cmd.VersionCmd)
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default if $HOME/.gouter.yaml")
 	server.Init()
-	if err := viper.BindPFlag("server.port", server.ServerCmd.Flags().Lookup("port")); err != nil {
-		log.Print(err)
-	}
 }
 
 func getHomeDir() string {
@@ -58,9 +55,11 @@ func initConfig() {
 	home := getHomeDir()
 	// Don't forget to read config either from cfgFile or from home directory!
 	if cfgFile != "" {
+		log.Printf("Loading config from %s", cfgFile)
 		viper.SetConfigFile(cfgFile)
 	} else {
 		// Search config in home directory with name ".gouter" (without extension).
+		log.Printf("Loading config from %s", home)
 		viper.AddConfigPath(home)
 		viper.SetConfigName(".gouter")
 	}

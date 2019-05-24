@@ -1,11 +1,10 @@
 package models
 
-// import (
-// 	"github.com/stevenandrewcarter/gouter/cmd/gouter"
-// 	// "labix.org/v2/mgo"
-// 	// "labix.org/v2/mgo/bson"
-// 	"log"
-// )
+import (
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
+	"log"
+)
 
 // Structure that the routes will be represented by
 type Route struct {
@@ -16,13 +15,16 @@ type Route struct {
 }
 
 // // Load all of the routes from the database
-func LoadRoutes() []Route {
+func LoadRoutes(config string) []Route {
 	result := []Route{}
-	//fn := cmd.executeFunc(func(collection *mgo.Collection) {
-	//	err := collection.Find(bson.M{}).All(&result)
-	//	if err != nil { panic(err) }
-	//})
-	//cmd.execute(fn, cmd.ROUTE_COLLECTION)
+	yamlFile, err := ioutil.ReadFile(config)
+	if err != nil {
+		log.Printf("yamlFile.Get err   #%v ", err)
+	}
+	err = yaml.Unmarshal(yamlFile, result)
+	if err != nil {
+		log.Fatalf("Unmarshal: %v", err)
+	}
 	return result
 }
 
