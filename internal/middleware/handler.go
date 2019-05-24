@@ -2,13 +2,22 @@ package middleware
 
 import (
 	"fmt"
+	"github.com/stevenandrewcarter/gouter/internal/config"
 	"html"
 	"log"
 	"net/http"
 )
 
+type Middleware struct {
+	Routes config.Routes
+}
+
+func (m *Middleware) Load(path string) error {
+	return m.Routes.Load(path)
+}
+
 // Handles the requests to the router
-func HandleRequest(w http.ResponseWriter, r *http.Request) {
+func (m *Middleware) HandleRequest(w http.ResponseWriter, r *http.Request) {
 	// startTime := time.Now()
 	// from := html.EscapeString(r.URL.Path)
 	// to := ""

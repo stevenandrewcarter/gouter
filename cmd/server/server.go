@@ -18,7 +18,8 @@ var host string
  */
 func start() {
 	logger.Infof("Starting Gouter v0.5. A simple HTTP router for RESTful API calls.")
-	http.HandleFunc("/", middleware.HandleRequest)
+	m := middleware.Middleware{}
+	http.HandleFunc("/", m.HandleRequest)
 	logger.Infof("Listening for HTTP requests on Port '%v'", port)
 }
 

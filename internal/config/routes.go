@@ -2,7 +2,6 @@ package config
 
 import (
 	"gopkg.in/yaml.v2"
-	"io/ioutil"
 )
 
 type Routes struct {
@@ -19,14 +18,7 @@ type Route struct {
 
 // // Load all of the routes from the database
 func (r *Routes) Load(config string) error {
-	yamlFile, err := ioutil.ReadFile(config)
-	if err != nil {
-		return err
-	}
-	err = yaml.Unmarshal(yamlFile, r)
-	if err != nil {
-		return err
-	}
+	return yaml.Unmarshal([]byte(config), r)
 }
 
 // // Finds the document in the collection for the given document name
