@@ -79,7 +79,6 @@ func (c *Config) Init() {
 		logger.Errorf("Can't read config:", err)
 		os.Exit(1)
 	}
-	logger.Infof("%s", viper.AllSettings())
 }
 
 func (c *Config) GetConfig() (string, error) {

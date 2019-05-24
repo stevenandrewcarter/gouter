@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/stevenandrewcarter/gouter/configs"
 	li "github.com/stevenandrewcarter/gouter/internal/logging"
 	"github.com/stevenandrewcarter/gouter/internal/middleware"
 	"net/http"
 )
 
 var logger = li.NewLogger()
+var config *configs.Config
 var port int
 var host string
 
@@ -18,13 +20,19 @@ var host string
  */
 func start() {
 	logger.Infof("Starting Gouter v0.5. A simple HTTP router for RESTful API calls.")
-	m := middleware.Middleware{}
+	m := middleware.Middleware{
+		Config: *config,
+	}
+	if err := m.Load(); err != nil {
+		logger.Fatalf(err.Error())
+	}
 	http.HandleFunc("/", m.HandleRequest)
 	logger.Infof("Listening for HTTP requests on Port '%v'", port)
 }
 
-func Init() {
+func Init(newConfig *configs.Config) {
 	logger.Infof("Initializing config for server")
+	config = newConfig
 	ServerCmd.Flags().IntVarP(&port,
 		"port",
 		"p",

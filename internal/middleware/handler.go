@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"fmt"
+	"github.com/stevenandrewcarter/gouter/configs"
 	"github.com/stevenandrewcarter/gouter/internal/config"
 	"html"
 	"log"
@@ -9,11 +10,16 @@ import (
 )
 
 type Middleware struct {
+	Config configs.Config
 	Routes config.Routes
 }
 
-func (m *Middleware) Load(path string) error {
-	return m.Routes.Load(path)
+func (m *Middleware) Load() error {
+	content, err := m.Config.GetConfig()
+	if err != nil {
+		return err
+	}
+	return m.Routes.Load(content)
 }
 
 // Handles the requests to the router

@@ -2,8 +2,23 @@ package configs
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"testing"
 )
+
+func getWorkingDir() string {
+	dir, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return dir
+}
+
+func deleteFile(path string) error {
+	// delete file
+	return os.Remove(path)
+}
 
 func TestConfig_InitEmptyPath(t *testing.T) {
 	config := Config{}
@@ -14,7 +29,7 @@ func TestConfig_InitEmptyPath(t *testing.T) {
 }
 
 func TestConfig_InitProvidedPath(t *testing.T) {
-	path := fmt.Sprintf("%s/t.yml", getHomeDir())
+	path := fmt.Sprintf("%s/t.yml", getWorkingDir())
 	config := Config{
 		Path: path,
 	}
@@ -22,6 +37,7 @@ func TestConfig_InitProvidedPath(t *testing.T) {
 	if config.Path != path {
 		t.Error("Should use the provided Path location provided")
 	}
+	deleteFile(path)
 }
 
 func TestConfig_GetConfigSuccess(t *testing.T) {

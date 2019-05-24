@@ -9,6 +9,7 @@ import (
 )
 
 var logger = li.NewLogger()
+var config configs.Config
 
 func main() {
 	if err := RootCmd.Execute(); err != nil {
@@ -27,8 +28,6 @@ var RootCmd = &cobra.Command{
 		   `,
 }
 
-var config configs.Config
-
 /*
  * Initialize the Cobra command handlers
  */
@@ -37,5 +36,5 @@ func init() {
 	RootCmd.PersistentFlags().StringVar(&config.Path, "config", "", "config file (default if $HOME/.gouter.yaml")
 	RootCmd.AddCommand(server.ServerCmd)
 	RootCmd.AddCommand(cmd.VersionCmd)
-	server.Init()
+	server.Init(&config)
 }
