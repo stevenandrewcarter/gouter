@@ -1,20 +1,21 @@
 package main
 
 import (
-	"fmt"
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/stevenandrewcarter/gouter/cmd/server"
 	"github.com/stevenandrewcarter/gouter/cmd/version"
 	"github.com/stevenandrewcarter/gouter/configs"
-	"log"
+	li "github.com/stevenandrewcarter/gouter/internal/logging"
 	"os"
 )
 
+var logger = li.NewLogger()
+
 func main() {
 	if err := RootCmd.Execute(); err != nil {
-		log.Fatalf(err.Error())
+		logger.Fatalf(err.Error())
 	}
 }
 
@@ -36,16 +37,16 @@ var cfgFile string
  */
 func init() {
 	cobra.OnInitialize(initConfig)
+	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default if $HOME/.gouter.yaml")
 	RootCmd.AddCommand(server.ServerCmd)
 	RootCmd.AddCommand(cmd.VersionCmd)
-	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default if $HOME/.gouter.yaml")
 	server.Init()
 }
 
 func getHomeDir() string {
 	home, err := homedir.Dir()
 	if err != nil {
-		fmt.Println(err)
+		logger.Error(err)
 		os.Exit(1)
 	}
 	return home
@@ -55,11 +56,11 @@ func initConfig() {
 	home := getHomeDir()
 	// Don't forget to read config either from cfgFile or from home directory!
 	if cfgFile != "" {
-		log.Printf("Loading config from %s", cfgFile)
+		logger.Infof("Loading config from %s", cfgFile)
 		viper.SetConfigFile(cfgFile)
 	} else {
 		// Search config in home directory with name ".gouter" (without extension).
-		log.Printf("Loading config from %s", home)
+		logger.Infof("Loading config from %s", home)
 		viper.AddConfigPath(home)
 		viper.SetConfigName(".gouter")
 	}
@@ -68,8 +69,9 @@ func initConfig() {
 		// Attempt to write a default file
 		configs.Create(home + "/.gouter.yaml")
 		if err := viper.ReadInConfig(); err != nil {
-			fmt.Println("Can't read config:", err)
+			logger.Errorf("Can't read config:", err)
 			os.Exit(1)
 		}
 	}
+	logger.Infof("%s", viper.AllSettings())
 }

@@ -4,33 +4,26 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/stevenandrewcarter/gouter/lib"
-	"log"
+	li "github.com/stevenandrewcarter/gouter/internal/logging"
+	"github.com/stevenandrewcarter/gouter/internal/middleware"
 	"net/http"
 )
 
+var logger = li.NewLogger()
 var port int
-var url string
 var host string
 
 /*
  * Starts the Server and opens the port for listening
  */
 func start() {
-	log.Printf(`
-  ________               __                
- /  _____/  ____  __ ___/  |_  ___________ 
-/   \  ___ /  _ \|  |  \   __\/ __ \_  __ \ 
-\    \_\  (  <_> )  |  /|  | \  ___/|  | \/
- \______  /\____/|____/ |__|  \___  >__|
-        \/                        \/`)
-	log.Printf("Starting Gouter v0.5. A simple HTTP router for RESTful API calls.")
-	http.HandleFunc("/", lib.HandleRequest)
-	log.Printf("Listening for HTTP requests on Port '%v'", port)
+	logger.Infof("Starting Gouter v0.5. A simple HTTP router for RESTful API calls.")
+	http.HandleFunc("/", middleware.HandleRequest)
+	logger.Infof("Listening for HTTP requests on Port '%v'", port)
 }
 
 func Init() {
-	log.Printf("Initializing config for server")
+	logger.Infof("Initializing config for server")
 	ServerCmd.Flags().IntVarP(&port,
 		"port",
 		"p",
@@ -41,8 +34,9 @@ func Init() {
 		"a",
 		"http://localhost",
 		"Host that Gouter is running on")
-	if err := viper.BindPFlag("port", ServerCmd.Flags().Lookup("port")); err != nil {
-		log.Print(err)
+	logger.Infof("Binding settings from Config")
+	if err := viper.BindPFlag("server.port", ServerCmd.Flags().Lookup("port")); err != nil {
+		logger.Error(err)
 	}
 }
 
@@ -52,6 +46,6 @@ var ServerCmd = &cobra.Command{
 	Long:  "Starts up the Gouter Server and allows for proxy messages to be routed through it",
 	Run: func(cmd *cobra.Command, args []string) {
 		start()
-		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
+		logger.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
 	},
 }

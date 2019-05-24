@@ -1,10 +1,13 @@
-package models
+package config
 
 import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-	"log"
 )
+
+type Routes struct {
+	Routes []Route `yaml:"routes"`
+}
 
 // Structure that the routes will be represented by
 type Route struct {
@@ -15,17 +18,15 @@ type Route struct {
 }
 
 // // Load all of the routes from the database
-func LoadRoutes(config string) []Route {
-	result := []Route{}
+func (r *Routes) Load(config string) error {
 	yamlFile, err := ioutil.ReadFile(config)
 	if err != nil {
-		log.Printf("yamlFile.Get err   #%v ", err)
+		return err
 	}
-	err = yaml.Unmarshal(yamlFile, result)
+	err = yaml.Unmarshal(yamlFile, r)
 	if err != nil {
-		log.Fatalf("Unmarshal: %v", err)
+		return err
 	}
-	return result
 }
 
 // // Finds the document in the collection for the given document name

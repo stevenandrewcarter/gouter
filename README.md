@@ -55,3 +55,4 @@ Here are some useful links for the Project and GoLang in general
 * [SB Admin](http://startbootstrap.com/sb-admin)
 * [mgo](http://labix.org/mgo)
 * [gcfg](https://code.google.com/p/gcfg/)
+* [Project Standards](https://github.com/golang-standards/project-layout)
